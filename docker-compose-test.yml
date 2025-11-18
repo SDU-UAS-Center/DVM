@@ -1,0 +1,7 @@
+services:
+  webapp:
+    build: .
+    pull_policy: build
+  worker:
+    build: .
+    pull_policy: build

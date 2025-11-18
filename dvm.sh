@@ -67,6 +67,12 @@ shell(){
 	run "$docker_compose"
 }
 
+test(){
+	local docker_compose="$(get_docker_compose)"
+	docker_compose="$docker_compose -f docker-compose-test.yml"
+	run "$docker_compose up"
+}
+
 POSITIONAL=()
 while [[ $# -gt 0 ]]
 do
@@ -110,6 +116,9 @@ case "$1" in
 		;;
 	shell)
 		shell
+		;;
+	test)
+		test
 		;;
 	*)
 		echo "Error: Unknown argument: $1" >&2
