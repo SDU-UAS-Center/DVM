@@ -1,14 +1,15 @@
 # Logfile conversation
 
-The process for converting logfiles from DJI drones to CSV files, have changed over time. From winter 2022 [AirData.com](https://airdata.com) provides the preferred solution.
+The process for converting log files from DJI drones to CSV files, have changed over time. From winter 2022 [AirData.com](https://airdata.com) provides the preferred solution.
 
-See more [Convert logfile](../howto/convert_logfiles.md)
+See more [Convert log file](../howto/convert_logfiles.md)
 
 ## TXTlogToCSVtoo.exe
 
 ```{Note}
 This tool is outdated and should not be used any more.
 ```
+
 The recommended tool for converting the log files to CSV is the windows program `TXTlogToCSVtool.exe` which can be downloaded from
 [https://phantompilots.com](https://phantompilots.com/threads/tool-win-offline-txt-flightrecord-to-csv-converter.70428/).
 

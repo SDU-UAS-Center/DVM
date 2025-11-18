@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/egemose/DroneVideoMeasure.git"
+    "url": "git+https://github.com/SDU-UAS-Center/DVM.git"
   },
   "dependencies": {
     "papaparse": "5.4.0",

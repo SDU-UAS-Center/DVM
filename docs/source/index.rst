@@ -20,7 +20,7 @@ Supported Drones
 
 The program can read flight logs exported from airdata.com. Airdata.com is able to handle flight logs from several drone manufactures including DJI.
 
-If you want support for other drones please create a `issue <https://github.com/egemose/DroneVideoMeasure/issues>`_ with a flight log attached.
+If you want support for other drones please create a `issue <https://github.com/SDU-UAS-Center/DVM/issues>`_ with a flight log attached.
 
 Authors
 -------

@@ -21,12 +21,12 @@ DVM expects that the uploaded drone log file is a comma separated file, containi
 
 ### `time(millisecond)`
 
-The `time(millisecond)` column contains the number of milliseconds since the UAV was turned on. Usually there is a new line in the logfile every `200 ms`.
+The `time(millisecond)` column contains the number of milliseconds since the UAV was turned on. Usually there is a new line in the log file every `200 ms`.
 Example value: `15600`
 
 ### `datetime(utc)`
 
-The `datetime(utc)` column contains a timestamp formatted as `%Y-%m-%d %H:%M:%S`. Usually there is a new line in the logfile every `200 ms`.
+The `datetime(utc)` column contains a timestamp formatted as `%Y-%m-%d %H:%M:%S`. Usually there is a new line in the log file every `200 ms`.
 Example value: `2023-03-02 10:10:59`.
 
 ### `latitude`
@@ -50,7 +50,7 @@ This column indicates whether the camera is recording video or not. It can conta
 
 ### `gimbal_heading(degrees)`
 
-The compas direction of the camera, specified in degrees. A value of zero means that the camera is oriented towards north.
+The compass direction of the camera, specified in degrees. A value of zero means that the camera is oriented towards north.
 Example value: `190.9`
 
 ### `gimbal_pitch(degrees)`

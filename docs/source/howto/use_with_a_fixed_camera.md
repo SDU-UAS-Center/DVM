@@ -10,6 +10,6 @@ The cameras GPS coordinates can be obtained from GPS measurements or from google
 
 If only relative measurements are desired, such as length in individual frames, GPS coordinates and yaw can be arbitrary. If the camera is pointing straight down (pitch -90&deg;) the roll can also be arbitrary.
 
-In DVM when creating a project, a fixed camera can be used by checking off the "Use Fixed camera instead of drone log" and filling in the needed information. This will create a "fake" logfile for DVM to use with the videos in the project.
+In DVM when creating a project, a fixed camera can be used by checking off the "Use Fixed camera instead of drone log" and filling in the needed information. This will create a "fake" log file for DVM to use with the videos in the project.
 
-Since there is no real logfile with timestamps any annotation will have the same timestamp, but the frame number is given in the output annotations which can be used to calculate relative time between to annotations if needed.
+Since there is no real log file with timestamps any annotation will have the same timestamp, but the frame number is given in the output annotations which can be used to calculate relative time between to annotations if needed.

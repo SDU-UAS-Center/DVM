@@ -29,8 +29,8 @@ classifiers = [
 files = ["requirements.txt"]
 
 [project.urls]
-Homepage = "https://github.com/egemose/DroneVideoMeasure"
-Issues = "https://github.com/egemose/DroneVideoMeasure/issues"
+Homepage = "https://github.com/SDU-UAS-Center/DVM"
+Issues = "https://github.com/SDU-UAS-Center/DVM/issues"
 
 [project.optional-dependencies]
 dev = [

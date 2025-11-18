@@ -17,7 +17,7 @@ DVM expects that the uploaded drone log file is a comma separated file, containi
 
 ### `CUSTOM.updateTime`
 
-The `CUSTOM.updateTime` column contains a timestamp formatted as `%Y/%m/%d %H:%M:%S.%f`. Usually there is a new line in the logfile every `100 ms`.
+The `CUSTOM.updateTime` column contains a timestamp formatted as `%Y/%m/%d %H:%M:%S.%f`. Usually there is a new line in the log file every `100 ms`.
 Example value: `2018/07/04 09:19:32.113`.
 
 ### `GIMBAL.yaw`

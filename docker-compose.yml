@@ -1,6 +1,6 @@
 services:
   webapp:
-    image: ghcr.io/egemose/dronevideomeasure:latest
+    image: ghcr.io/sdu-uas-center/dvm:latest
     container_name: dvm_app
     command: /app/entrypoint.sh
     ports:
@@ -14,7 +14,7 @@ services:
       - worker
       - db
   worker:
-    image: ghcr.io/egemose/dronevideomeasure:latest
+    image: ghcr.io/sdu-uas-center/dvm:latest
     container_name: dvm_worker
     command: celery -A dvm.make_celery worker --loglevel=WARNING
     volumes:
@@ -24,10 +24,10 @@ services:
     depends_on:
       - redis
   redis:
-    image: redis:alpine
+    image: docker.io/redis:alpine
     container_name: dvm_redis
   db:
-    image: postgres:17-alpine
+    image: docker.io/postgres:17-alpine
     container_name: dvm_db
     volumes:
       - type: volume

@@ -1,18 +1,19 @@
 # Getting stared with Drone Video Measure
 
 This tutorial will guide you through the steps of using the Drone Video Measure programme. The following dataset on zenodo will be used as an example.
+
 - [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3604005.svg)](https://doi.org/10.5281/zenodo.3604005)
 
 The dataset contains the following elements that will be used in this tutorial:
 
 - A video of a chess board calibration target
-	- `calibration.MOV`
+  - `calibration.MOV`
 - A logfile file from a DJI Phantom 4 Pro drone
-	- `DJIFlightRecord_2018-07-04_[11-19-31].csv`
+  - `DJIFlightRecord_2018-07-04_[11-19-31].csv`
 - A video recorded by a DJI Phantom 4 Pro drone
-	- `DJI_0013.MOV`
+  - `DJI_0013.MOV`
 
-This tutorial assumes that you already have installed the Drone Video Measure program and opened the interface in your browser on this link http://localhost:5000. You should now see this screen. If not please consult the installation guide linked to below.
+This tutorial assumes that you already have installed the Drone Video Measure program and opened the interface in your browser on this link [http://localhost:5000](http://localhost:5000). You should now see this screen. If not please consult the installation guide linked to below.
 
 - [How-to install](../howto/install.md).
 
@@ -121,7 +122,7 @@ When the annotations are completed, they can be exported as a csv (comma separat
 
 For more information about how to create a suitable calibration video see this how-to:
 
-* [Record a calibration video](../howto/record_calibration_video.md)
+- [Record a calibration video](../howto/record_calibration_video.md)
 
 For information about how to convert a logfile to the proper format, see this how-to:
 

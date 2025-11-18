@@ -7,7 +7,7 @@
 There seems to be a data structure for undo and redo.
 This can be found in the file static/video_annotator.js
 around line 412 in the functions on_undo and on_redo.
-Eash time the annotations are updated, the new state is
+Each time the annotations are updated, the new state is
 added to the `this.states` list.
 
 If this is used for each individual annotation that is

@@ -1,21 +1,21 @@
-# Convert Drone Logfiles to csv files
+# Convert Drone Log files to csv files
 
 The flight log needs to be converted to csv format before it can be used by the Drone Video Measure software. This can be done by using the site [AirData.com](https://AirData.com).
 
 Before exporting log files as CSV from AirData.com, you need to ensure that the values in the file are exported using the proper units.
 
 - Date/Time format
-	- 2022-03-21 17:23:57
+  - 2022-03-21 17:23:57
 - Distance Units
-	- Meters
+  - Meters
 - Altitude Units:
-	- Meters
+  - Meters
 - Speed Units:
-	- Meters Per Second
+  - Meters Per Second
 - Temperature Units:
-	- Celsius
+  - Celsius
 - CSV file units:
-	- Same units as selected above
+  - Same units as selected above
 
 It should also be possible to link the drone directly with the [AirData.com](https://airdata.com) site. See this link for details:
 
