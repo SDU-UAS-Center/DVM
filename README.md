@@ -3,23 +3,33 @@
 A tool to measure and track things on a planar surface.
 Developed to measure and track marine mammals in the surface of the ocean.
 
-If you want to use the tool, the easiest installation method is to use the
-DroneVideoMeasureRunner, which downloads and installs the most recent
-docker image of the program.
+## Quick Installation and Use
 
-* [DroneVideoMeasureRunner](https://github.com/henrikmidtiby/DroneVideoMeasureRunner)
+For a more ditailed guide see the dokumentation: [Docs](https://sdu-uas-center.github.io/DVM/).
 
-If you want to modify the source code, ie. to add new features, you have to
-perform a manual install, as described in this howto guide.
+### Install and run
 
-* [Howto - Install Drone Video Measure](documentation/Howto-InstallDroneVideoMeasure.md)
+Docker and Docker Compose is needed to run. Download the latest docker-compose.yml from [releases](https://github.com/SDU-UAS-Center/DVM/releases) and from a terminal run:
 
+```sh
+docker compose up
+```
+
+This will download the needed container images and run them with docker. You can now open a browser at [http://localhost:5000](http://localhost:5000). It may take a couple of minutes on the first startup before DVM is ready.
+
+### Stopping DVM
+
+When done with DVM the containers can be stopped with:
+
+```sh
+docker compose down
+```
 
 ## Getting started using Drone Video Measure
 
 A detailed description of how to use the program can be found here:
-* [Tutorial - Getting started with Drone Video Measure](documentation/Tutorial-GettingStartedWithDroneVideoMeasure.md)
 
+* [Tutorial - Getting started with Drone Video Measure](https://sdu-uas-center.github.io/DVM/tutorials/getting_started.html)
 
 ## Supported Drones
 
@@ -28,13 +38,11 @@ Airdata.com is able to handle flight logs from several drone manufactures includ
 
 If you want support for other drones please create a issue with a flight log attached.
 
-
 ## Author
 
-Written by Henrik Dyrberg Egemose (hde@mmmi.sdu.dk) as part of the InvaDrone and Back2Nature projects,
+Written by Henrik Dyrberg Egemose [hde@mmmi.sdu.dk](hde@mmmi.sdu.dk) as part of the InvaDrone and Back2Nature projects,
 research projects by the University of Southern Denmark UAS Center (SDU UAS Center).
-Now maintained by Henrik Skov Midtiby (hemi@mmmi.sdu.dk).
-
+Now maintained by Henrik Skov Midtiby [hemi@mmmi.sdu.dk](hemi@mmmi.sdu.dk).
 
 ## License
 
