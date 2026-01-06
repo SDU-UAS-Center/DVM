@@ -86,21 +86,21 @@ def get_new_project_form() -> tuple[Response | None, NewProjectForm]:
                 log_filename = get_random_filename("fake_drone_log.csv")
                 log_file = AppConfig.data_dir.joinpath(log_filename)
                 create_fake_drone_log(log_file, drone_height, drone_lat, drone_lon, drone_yaw, drone_pitch, drone_roll)
-                success = drone_log.test_log(log_file)
+                success, msg = drone_log.test_log(log_file)
                 if not success:
                     remove_file(log_file)
                     log_filename = None  # type: ignore[assignment]
-                    log_error = "Error creating the artificial drone log file. Please try again."
+                    log_error = msg
             elif form.log_file.data:
                 log_error = None
                 log_filename = get_random_filename(form.log_file.data.filename)
                 log_file = AppConfig.data_dir.joinpath(log_filename)
                 form.log_file.data.save(log_file)
-                success = drone_log.test_log(log_file)
+                success, msg = drone_log.test_log(log_file)
                 if not success:
                     remove_file(log_file)
                     log_filename = None
-                    log_error = "Error interpreting the drone log file. Try and upload the log file again."
+                    log_error = msg
             else:
                 log_error = "No drone log file added. Please add a log file or use a fixed camera."
             project = Project(
@@ -147,13 +147,13 @@ def get_edit_project_form() -> EditProjectForm:
                 log_filename = get_random_filename("fake_drone_log.csv")
                 log_file = AppConfig.data_dir.joinpath(log_filename)
                 create_fake_drone_log(log_file, drone_height, drone_lat, drone_lon, drone_yaw, drone_pitch, drone_roll)
-                success = drone_log.test_log(log_file)
+                success, msg = drone_log.test_log(log_file)
                 if success:
                     project.log_file = str(log_file)
                 if not success:
                     remove_file(log_file)
                     project.log_file = None
-                    log_error = "Error creating the artificial drone log file. Please try again."
+                    log_error = msg
                 project.log_error = log_error
             elif form.edit_log_file.data:
                 remove_file(project.log_file)
@@ -161,13 +161,13 @@ def get_edit_project_form() -> EditProjectForm:
                 log_filename = get_random_filename(form.edit_log_file.data.filename)
                 log_file = AppConfig.data_dir.joinpath(log_filename)
                 form.edit_log_file.data.save(log_file)
-                success = drone_log.test_log(log_file)
+                success, msg = drone_log.test_log(log_file)
                 if success:
                     project.log_file = str(log_file)
                 else:
                     remove_file(log_file)
                     project.log_file = None
-                    log_error = "Error interpreting the drone log file. Try and upload the log file again."
+                    log_error = msg
                 project.log_error = log_error
             db.session.commit()
     return form

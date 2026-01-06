@@ -39,15 +39,34 @@ class DroneLog:
         return self.time_stamp, self.height, yaw, pitch, roll, self.is_video
 
     @staticmethod
-    def test_log(log: Path) -> bool:
-        res = DroneLog.test_log_txt_to_log_csv_file(log)
+    def test_log(log: Path) -> tuple[bool, str]:
+        res, msg = DroneLog.test_log_txt_to_log_csv_file(log)
         if res is True:
-            return True
-        res = DroneLog.test_log_air_data(log)
-        return res
+            return res, msg
+        res, msg = DroneLog.test_log_air_data(log)
+        return res, msg
 
     @staticmethod
-    def test_log_air_data(log: Path) -> bool:
+    def check_log_headers(log: Path, indexes: list[str]) -> tuple[bool, str]:
+        with log.open(encoding="iso8859_10") as csv_file:
+            reader = csv.DictReader(csv_file)
+            try:
+                row = next(reader)
+            except StopIteration:
+                logger.debug("Logfile is empty")
+                return False, "Log file is empty! Please use another log file."
+            for idx in indexes:
+                if idx not in row:
+                    logger.debug(f"Could not locate the column {idx} in the uploaded logfile")
+                    return (
+                        False,
+                        "Log file does not contain the right headers. Make sure the log file contains the required headers.",
+                    )
+            logger.debug("Found all expected columns in the log file (airdata.com format)")
+            return True, "No errors"
+
+    @staticmethod
+    def test_log_air_data(log: Path) -> tuple[bool, str]:
         indexes = [
             "time(millisecond)",
             "datetime(utc)",
@@ -63,20 +82,11 @@ class DroneLog:
             "gimbal_roll(degrees)",
             "altitude(meters)",
         ]
-        # remove_null_bytes(log)
         logger.debug(f'Opening log "{log}" to test - assuming it contains data from airdata.com ')
-        with log.open(encoding="iso8859_10") as csv_file:
-            reader = csv.DictReader(csv_file)
-            row = next(reader)
-            for idx in indexes:
-                if idx not in row:
-                    logger.debug(f"Could not locate the column {idx} in the uploaded logfile")
-                    return False
-            logger.debug("Found all expected columns in the log file (airdata.com format)")
-            return True
+        return DroneLog.check_log_headers(log, indexes)
 
     @staticmethod
-    def test_log_txt_to_log_csv_file(log: Path) -> bool:
+    def test_log_txt_to_log_csv_file(log: Path) -> tuple[bool, str]:
         indexes = [
             "CUSTOM.updateTime",
             "GIMBAL.yaw",
@@ -89,15 +99,7 @@ class DroneLog:
         ]
         remove_null_bytes(log)
         logger.debug(f'Opening log "{log}" to test - assuming it contains data from TXTlogToCSVtool.exe')
-        with log.open(encoding="iso8859_10") as csv_file:
-            reader = csv.DictReader(csv_file)
-            row = next(reader)
-            for idx in indexes:
-                if idx not in row:
-                    logger.debug(f"Could not locate the column {idx} in the uploaded logfile")
-                    return False
-            logger.debug("Found all expected columns in the log file (TXTlogToCSVtool.exe)")
-            return True
+        return DroneLog.check_log_headers(log, indexes)
 
     def get_log_data(self, log: Path) -> None:
         try:
