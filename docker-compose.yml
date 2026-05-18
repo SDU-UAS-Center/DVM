@@ -2,7 +2,7 @@ services:
   webapp:
     image: ghcr.io/sdu-uas-center/dvm:latest
     container_name: dvm_app
-    command: /app/entrypoint.sh
+    command: uv run /app/entrypoint.sh
     ports:
       - "5000:5000"
     volumes:
@@ -16,7 +16,7 @@ services:
   worker:
     image: ghcr.io/sdu-uas-center/dvm:latest
     container_name: dvm_worker
-    command: celery -A dvm.make_celery worker --loglevel=WARNING
+    command: uv run celery -A dvm.make_celery worker --loglevel=WARNING
     volumes:
       - type: volume
         source: dvm_app_media
