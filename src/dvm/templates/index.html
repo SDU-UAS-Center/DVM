@@ -1,79 +1,85 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row justify-content-between" style="margin-top: 30px">
-  <div class="col-8">
-    <h1 class="text-center"> Drone Video Measure </h1>
-    <p>
-    Drone Video Measure (DVM) is a open source tool to measure and track things on a planar surface. Developed to measure and track marine mammals in the surface of the ocean.
-    </p>
-    <br/>
-    <h2 class="text-center"> Usage </h2>
-    <p>
-    A detailed description of how to use the program can be found here: <a href="https://sdu-uas-center.github.io/DVM/">DroneVideoMeasure</a>
-    </p>
-    <p>
-    Demo data is available at <a href="https://zenodo.org/record/3604005#.YACjTdYo9H4">DOI</a> including a video demo of how to use the program.
-    </p>
-    <br/>
-    <h2 class="text-center"> Supported Drones </h2>
-    <p>
-    Currently only flight logs from DJI drones have been tested. If you want support for other drones please create a issue with a flight log attached.
-    </p>
-    <br/>
-    <h2 class="text-center"> Author </h2>
-    <p>
-    Written by Henrik Dyrberg Egemose (hde@mmmi.sdu.dk) as part of the InvaDrone and Back2Nature projects, research projects by the University of Southern Denmark UAS Center (SDU UAS Center).
-    </p>
-    <br/>
-    <h2 class="text-center"> License </h2>
-    <p>
-    This project is licensed under the MIT license - see <a href="https://github.com/SDU-UAS-Center/DVM/blob/main/LICENSE">License</a> for details.
-    </p>
+  <div class="row justify-content-between" style="margin-top: 30px">
+    <div class="col-8">
+      <h1 class="text-center">Drone Video Measure</h1>
+      <p>
+        Drone Video Measure (DVM) is a open source tool to measure and track things on a planar surface. Developed to
+        measure and track marine mammals in the surface of the ocean.
+      </p>
+      <br />
+      <h2 class="text-center">Usage</h2>
+      <p>
+        A detailed description of how to use the program can be found here:
+        <a href="https://sdu-uas-center.github.io/DVM/">DroneVideoMeasure</a>
+      </p>
+      <p>
+        Demo data is available at <a href="https://zenodo.org/record/3604005#.YACjTdYo9H4">DOI</a> including a video
+        demo of how to use the program.
+      </p>
+      <br />
+      <h2 class="text-center">Supported Drones</h2>
+      <p>
+        Currently only flight logs from DJI drones have been tested. If you want support for other drones please create
+        a issue with a flight log attached.
+      </p>
+      <br />
+      <h2 class="text-center">Author</h2>
+      <p>
+        Written by Henrik Dyrberg Egemose (hde@mmmi.sdu.dk) as part of the InvaDrone and Back2Nature projects, research
+        projects by the University of Southern Denmark UAS Center (SDU UAS Center).
+      </p>
+      <br />
+      <h2 class="text-center">License</h2>
+      <p>
+        This project is licensed under the MIT license - see
+        <a href="https://github.com/SDU-UAS-Center/DVM/blob/main/LICENSE">License</a> for details.
+      </p>
+    </div>
+    <div class="col-3">
+      <a href="{{ url_for('projects.projects') }}">
+        <h2 class="text-center" style="margin-bottom: 1rem">Projects</h2>
+      </a>
+      {% if projects|length > 0 %}
+        {% for project in projects %}
+          <a href="{{ url_for('video_gallery.video_gallery', project_id=project.id) }}">
+            <div class="card border-dark mb-3">
+              <div class="card-header">
+                <h5 class="card-title">{{ project.name }}</h5>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      {% else %}
+        <p>No projects added yet.</p>
+      {% endif %}
+    </div>
   </div>
-  <div class="col-3">
-    <a href="{{ url_for('projects.projects') }}">
-    <h2 class="text-center" style="margin-bottom: 1rem"> Projects </h2>
-    </a>
-    {% if projects|length > 0 %}
-    {% for project in projects %}
-    <a href="{{ url_for('video_gallery.video_gallery', project_id=project.id) }}">
-      <div class="card border-dark mb-3">
-        <div class="card-header">
-          <h5 class="card-title">{{ project.name }}</h5>
-        </div>
-      </div>
-    </a>
-    {% endfor %}
-    {% else %}
-    <p>No projects added yet.</p>
-    {% endif %}
-  </div>
-</div>
 {% endblock %}
 
 {% block scripts %}
-{{ super() }}
-<script type="text/javascript">
-  $('#filter_projects').on('input', function(event) {
-    var input = $(this)
-    var text = input.val()
-    var regex = RegExp(text)
-    $('.card').each(function() {
-      project = $(this).find('.card-title').text()
-      if (regex.test(project)) {
-        $(this).parent().collapse('show')
-      } else {
-        $(this).parent().collapse('hide')
+  {{ super() }}
+  <script type="text/javascript">
+    $("#filter_projects").on("input", function (event) {
+      var input = $(this);
+      var text = input.val();
+      var regex = RegExp(text);
+      $(".card").each(function () {
+        project = $(this).find(".card-title").text();
+        if (regex.test(project)) {
+          $(this).parent().collapse("show");
+        } else {
+          $(this).parent().collapse("hide");
+        }
+      });
+    });
+    $(document).keypress(function (event) {
+      if (event.key == "Enter") {
+        if ((event.target = $("#filter_projects"))) {
+          return false;
+        }
       }
-    })
-  });
-  $(document).keypress(function(event) {
-    if (event.key == 'Enter') {
-      if (event.target = $('#filter_projects')) {
-        return false;
-      }
-    }
-  });
-</script>
+    });
+  </script>
 {% endblock %}

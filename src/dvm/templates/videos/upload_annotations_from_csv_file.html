@@ -7,59 +7,70 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-   <script>
-      function upload_annotations_from_csv_file() {
-        const csvFile = document.getElementById("select_csv_file_with_annotations");
-        const inputfile = csvFile.files[0];
-        async function update_current_frame_number(value) {
-          let current_frame_number = document.getElementById("adding_annotation_to_this_frame");
-          current_frame_number.textContent = value['frame'];
-          const p1 = new Promise(resolve => {
-            setTimeout(
-              () => {
+      <script>
+        function upload_annotations_from_csv_file() {
+          const csvFile = document.getElementById("select_csv_file_with_annotations");
+          const inputfile = csvFile.files[0];
+          async function update_current_frame_number(value) {
+            let current_frame_number = document.getElementById("adding_annotation_to_this_frame");
+            current_frame_number.textContent = value["frame"];
+            const p1 = new Promise((resolve) => {
+              setTimeout(() => {
                 resolve();
-            }, 1)});
-          await p1;
-        }
-        Papa.parse(inputfile, {
+              }, 1);
+            });
+            await p1;
+          }
+          Papa.parse(inputfile, {
             header: true,
             dynamicTyping: true,
-            complete: async function(results) {
-              for(observation_idx in results.data)
-              {
+            complete: async function (results) {
+              for (observation_idx in results.data) {
                 let observation = results.data[observation_idx];
-                if("frame" in observation)
-                {
-                  VideoAnnotator.addAnnotationPointAPI(observation['frame'], observation['image_x'], observation['image_y'], observation["name"]);
-                  if(observation_idx % 20 == 0)
-                  {
+                if ("frame" in observation) {
+                  VideoAnnotator.addAnnotationPointAPI(
+                    observation["frame"],
+                    observation["image_x"],
+                    observation["image_y"],
+                    observation["name"],
+                  );
+                  if (observation_idx % 20 == 0) {
                     await update_current_frame_number(observation);
                   }
                 }
               }
-              VideoAnnotator.updateModifications(true)
+              VideoAnnotator.updateModifications(true);
               let current_frame_number = document.getElementById("adding_annotation_to_this_frame");
               current_frame_number.textContent = "not active";
-            }
+            },
           });
-      }
-   </script>
+        }
+      </script>
       <div class="modal-body">
         <form id="change_takeoff_altitude_form">
           <div class="form-group">
-            <label for="select_csv_file_with_annotations" class="col-form-label">Select CSV file with annotations to upload.</label>
+            <label for="select_csv_file_with_annotations" class="col-form-label"
+              >Select CSV file with annotations to upload.</label
+            >
             <input type="file" id="select_csv_file_with_annotations" accept=".csv" />
             <p></p>
             <p>Only point annotations are supported.</p>
             <p>The following columns will be used from the file:</p>
-            <ul><li>name</li><li>frame</li><li>image_x</li><li>image_y</li></ul>
+            <ul>
+              <li>name</li>
+              <li>frame</li>
+              <li>image_x</li>
+              <li>image_y</li>
+            </ul>
             <p>Current frame: <span id="adding_annotation_to_this_frame">not active</span></p>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="upload_annotations_from_csv_file()">Upload annotations</button>
+        <button type="button" class="btn btn-primary" onclick="upload_annotations_from_csv_file()">
+          Upload annotations
+        </button>
       </div>
     </div>
   </div>

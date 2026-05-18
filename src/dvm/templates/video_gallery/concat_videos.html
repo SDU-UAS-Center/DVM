@@ -1,62 +1,81 @@
 {% extends 'base.html' %}
 
 {% block head %}
-{{ super() }}
-<script src="{{ url_for('node_modules', filename='html5sortable/dist/html5sortable.min.js') }}"></script>
+  {{ super() }}
+  <script src="{{ url_for('node_modules', filename='html5sortable/dist/html5sortable.min.js') }}"></script>
 {% endblock %}
 
 {% block content %}
-{% include 'video_gallery/concat_modal.html' %}
-<div class="row p-3">
-  <div class="col">
-    <h2>Drag videos</h2>
-    <ul class="list-group p-3 js-sortable-copy border border-primary rounded-0" aria-dropeffect="move">
-      {% for video in videos %}
-      <li class="list-group-item list-group-item-action list-group-item-dark rounded" draggable="true" role="option" aria-grabbed="false" data-video-id="{{ video.id }}">{{ video.name }}</li>
-      {% endfor %}
-    </ul>
+  {% include 'video_gallery/concat_modal.html' %}
+  <div class="row p-3">
+    <div class="col">
+      <h2>Drag videos</h2>
+      <ul class="list-group p-3 js-sortable-copy border border-primary rounded-0" aria-dropeffect="move">
+        {% for video in videos %}
+          <li
+            class="list-group-item list-group-item-action list-group-item-dark rounded"
+            draggable="true"
+            role="option"
+            aria-grabbed="false"
+            data-video-id="{{ video.id }}"
+          >
+            {{ video.name }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col">
+      <h2>Drop videos and sort</h2>
+      <ul class="list-group p-3 js-sortable-copy-target border border-primary rounded-0" aria-dropeffect="move"></ul>
+    </div>
   </div>
-  <div class="col">
-    <h2>Drop videos and sort</h2>
-    <ul class="list-group p-3 js-sortable-copy-target border border-primary rounded-0" aria-dropeffect="move">
-    </ul>
+  <div class="row p-3">
+    <div class="col">
+      <button
+        type="button"
+        class="btn btn-primary float-right"
+        id="concat"
+        data-toggle="modal"
+        data-target="#concat_modal"
+      >
+        <i class="fas fa-file-video"></i> Concatenate videos
+      </button>
+    </div>
   </div>
-</div>
-<div class="row p-3">
-  <div class="col">
-    <button type="button" class="btn btn-primary float-right" id="concat" data-toggle="modal" data-target="#concat_modal"><i class="fas fa-file-video"></i> Concatenate videos</button>
-  </div>
-</div>
 {% endblock %}
 {% block scripts %}
-{{ super() }}
-<script type="text/javascript">
-  sortable('.js-sortable-copy', {
-    forcePlaceholderSize: true,
-    placeholderClass: 'list-group-item',
-    copy: false,
-    acceptFrom: false,
-  });
-  sortable('.js-sortable-copy-target', {
-    forcePlaceholderSize: true,
-    placeholderClass: 'list-group-item',
-    copy: false,
-    acceptFrom: '.js-sortable-copy,.js-sortable-copy-target',
-  });
-  function concat() {
-    var output_name = $('#concat_input').val();
-    $('#concat_modal').modal('toggle');
-    var obj = sortable('.js-sortable-copy-target', 'serialize')[0];
-    var data = [];
-    $.each(obj.items, function(index, value) {
-      data.push($(value.node).data('video-id'));
+  {{ super() }}
+  <script type="text/javascript">
+    sortable(".js-sortable-copy", {
+      forcePlaceholderSize: true,
+      placeholderClass: "list-group-item",
+      copy: false,
+      acceptFrom: false,
     });
-    $.post('{{ url_for("video_gallery.do_concat_videos", project_id=project_id) }}', {
-      videos: JSON.stringify(data),
-      output_name: output_name,
-    }, function(data) {
-      window.location.href = '{{ url_for("video_gallery.video_gallery", project_id=project_id) }}';
+    sortable(".js-sortable-copy-target", {
+      forcePlaceholderSize: true,
+      placeholderClass: "list-group-item",
+      copy: false,
+      acceptFrom: ".js-sortable-copy,.js-sortable-copy-target",
     });
-  };
-</script>
+    function concat() {
+      var output_name = $("#concat_input").val();
+      $("#concat_modal").modal("toggle");
+      var obj = sortable(".js-sortable-copy-target", "serialize")[0];
+      var data = [];
+      $.each(obj.items, function (index, value) {
+        data.push($(value.node).data("video-id"));
+      });
+      $.post(
+        '{{ url_for("video_gallery.do_concat_videos", project_id=project_id) }}',
+        {
+          videos: JSON.stringify(data),
+          output_name: output_name,
+        },
+        function (data) {
+          window.location.href = '{{ url_for("video_gallery.video_gallery", project_id=project_id) }}';
+        },
+      );
+    }
+  </script>
 {% endblock %}

@@ -10,9 +10,9 @@
       </div>
       <form class="form" method="post" role="form">
         <div class="modal-body">
-            {{ new_drone_form.hidden_tag() }}
-            {{ wtf.form_field(new_drone_form.name) }}
-            {{ wtf.form_field(new_drone_form.camera_settings) }}
+          {{ new_drone_form.hidden_tag() }}
+          {{ wtf.form_field(new_drone_form.name) }}
+          {{ wtf.form_field(new_drone_form.camera_settings) }}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
