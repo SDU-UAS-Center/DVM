@@ -151,7 +151,8 @@ def calibration_task(self: CeleryTask, drone_id: int, coverage: int, n_images: i
 @drones_view.route("/drones/status/<task_id>")  # type: ignore[misc]
 def task_status(task_id: int) -> Response:
     task_db = db.get_or_404(Task, task_id)
-    task = eval(task_db.function + '.AsyncResult("' + task_db.task_id + '")')
+    task = calibration_task.AsyncResult(task_db.task_id)
+    # task = eval(task_db.function + '.AsyncResult("' + task_db.task_id + '")')
     if task.state == "PENDING":
         response = {"state": task.state, "status": "Pending"}
     elif task.state == "SUCCESS":
@@ -208,7 +209,7 @@ def remove_drone(drone_id: int) -> Response:
     drone = db.get_or_404(Drone, drone_id)
     if drone.task:
         task_db = db.get_or_404(Task, drone.task.id)
-        task = eval(task_db.function + '.AsyncResult("' + task_db.task_id + '")')
+        task = calibration_task.AsyncResult(task_db.task_id)
         task.revoke(terminate=True)
         db.session.delete(task_db)
     for project in drone.projects:
