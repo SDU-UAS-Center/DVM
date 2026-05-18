@@ -13,31 +13,20 @@ Thank you for your interest in contributing to *DVM* and we welcome all pull req
 *DVM* is build as a `Flask <https://flask.palletsprojects.com/en/stable/>`_ application as the python backend and uses `Node.js <https://nodejs.org/en>`_ to handle JavaScript dependencies. The python dependencies are listed in *requirements.txt* and Node.js dependencies in *package.json*.
 
 .. note::
-    Python version 3.12 or newer is required.
+    Python version 3.13 or newer is required.
 
 
 Pre-commit
 ----------
 
-Development uses pre-commit for code linting and formatting. To setup development with pre-commit follow these steps after cloning the repository:
+Development uses uv and pre-commit for code linting and formatting. To setup development with pre-commit follow these steps after cloning the repository:
 
-Create a virtual environment with python:
-
-.. code-block:: shell
-
-    python -m venv venv
-
-Activate virtual environment:
-
-.. code-block:: shell
-
-    source venv/bin/activate
 
 Install *DVM* python package as editable with the development dependencies:
 
 .. code-block:: shell
 
-    pip install -e .[dev]
+    uv sync --dev
 
 Install pre-commit hooks
 
@@ -89,7 +78,7 @@ Test is automatically run when making a commit, but can also be run with:
 
 .. code-block:: shell
 
-    pytest
+    uv run pytest
 
 This will also generate a html coverage report in *test_coverage*.
 
@@ -100,7 +89,7 @@ To generate this documentation, in the *docs* folder run:
 
 .. code-block:: shell
 
-    make html
+    uv run make html
 
 This will generate html documentation in the *docs/build/html* folder.
 
