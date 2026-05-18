@@ -1,23 +1,75 @@
-# ignore git idea etc.
-.git
-.gitignore
-.idea
-.vscode
-*.pyc
-/data/
-/example-data/
-checkerboard.png
-dvm.sh
-
-venv/
-.venv/
-documentation/
-dvm_runner/
-manual/
+.github/
+docs/
 paper/
+tests/
+.gitattributes
+.gitignore
 .pre-commit-config.yaml
+checkerboard.png
 docker-compose*
 Dockerfile
-Makefile
+dvm.sh
+mypy.ini
 
-TODO.md
+# From .gitignore
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# pytest
+test_coverage/
+.coverage
+.pytest_cache
+
+# Sphinx documentation
+docs/_build/
+docs/build/
+docs/source/_autosummary/
+docs/source/reference/
+docs/source/_build/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# mypy
+.mypy_cache/
+
+# ruff
+.ruff_cache/
+
+# MISC
+*.pyc
+*.bak
+.DS_Store
+.vscode
+.pi
+
+# test data
+data/
+example-data/
