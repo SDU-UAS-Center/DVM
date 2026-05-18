@@ -54,6 +54,7 @@ venv.bak/
 *.bak
 .DS_Store
 .vscode
+.pi
 
 # test data
 data/
