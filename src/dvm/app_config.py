@@ -23,7 +23,7 @@ class AppConfig:
     DROPZONE_PARALLEL_UPLOADS = 1
     DROPZONE_TIMEOUT = 1800000
     DROPZONE_ALLOWED_FILE_CUSTOM = True
-    DROPZONE_ALLOWED_FILE_TYPE = "image/*, video/*, .mov"
+    DROPZONE_ALLOWED_FILE_TYPE = "image/*, video/*, .mov, .MOV"
     CELERY = {
         "broker_url": "redis://redis:6379/0",
         "result_backend": "redis://redis:6379/0",
