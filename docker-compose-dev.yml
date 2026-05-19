@@ -2,7 +2,7 @@ services:
   webapp:
     build: .
     pull_policy: build
-    command: uv run /app/entrypoint.sh --dev
+    command: /app/entrypoint.sh --dev
     volumes:
       - type: bind
         source: ./src/dvm
@@ -13,7 +13,7 @@ services:
   worker:
     build: .
     pull_policy: build
-    command: "uv run watchfiles --filter python 'celery -A dvm.make_celery worker --loglevel=WARNING' /app/src/dvm"
+    command: "watchfiles --filter python 'celery -A dvm.make_celery worker --loglevel=WARNING' /app/src/dvm"
     volumes:
       - type: bind
         source: ./src/dvm

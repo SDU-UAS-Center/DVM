@@ -16,4 +16,5 @@ RUN mkdir /app_data
 
 EXPOSE 5000
 ENV PYTHONUNBUFFERED=1
-CMD ["uv", "run", "gunicorn", "-b 0.0.0.0:5000", "-k gevent", "-t 10000", "'dvm:app'"]
+ENV PATH="/app/.venv/bin:$PATH"
+CMD ["gunicorn", "-b 0.0.0.0:5000", "-k gevent", "-t 10000", "'dvm:app'"]
