@@ -225,5 +225,6 @@ def remove_drone(drone_id: int) -> Response:
     return flask.redirect(flask.url_for("drones.drones"))
 
 
-def remove_file(file: Path) -> None:
-    Path.unlink(file, missing_ok=True)
+def remove_file(file: Path | None) -> None:
+    if file is not None:
+        Path.unlink(file, missing_ok=True)
