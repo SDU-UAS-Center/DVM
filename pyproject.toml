@@ -15,10 +15,8 @@ maintainers = [
 description = "Drone Video Measure."
 readme = "README.md"
 license-files = ["LICEN[CS]E*"]
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 classifiers = [
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering :: Image Processing",
@@ -40,7 +38,7 @@ dependencies = [
     "utm==0.8.1",
     "ffmpeg-python==0.2.0",
     "bokeh==3.7.2",
-    "opencv-python==4.11.0.86",
+    "opencv-python",
     "scikit-learn==1.6.1",
     "gunicorn==23.0.0",
     "gevent==25.4.2",
