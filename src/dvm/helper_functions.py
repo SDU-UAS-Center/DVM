@@ -35,8 +35,10 @@ def save_annotations_csv(annotations: list[list[Any] | None], filename: Path) ->
             "north",
             "zone number",
             "zone letter",
-            "image_x",
-            "image_y",
+            "image1_x",
+            "image1_y",
+            "image2_x",
+            "image2_y",
             "start_east",
             "start_north",
             "end_east",
@@ -100,10 +102,6 @@ def get_frame_obj_data(obj: dict[str, Any]) -> list[Any] | None:
         yoffset = obj["top"] + obj["height"] / 2
         image_point1 = (x1 + xoffset, y1 + yoffset)
         image_point2 = (x2 + xoffset, y2 + yoffset)
-        image_point = (
-            (image_point1[0] + image_point2[0]) / 2,
-            (image_point1[1] + image_point2[1]) / 2,
-        )
         wp1, zone = fov.get_world_point(image_point1, *log_data[1:], return_zone=True)
         wp2 = fov.get_world_point(image_point2, *log_data[1:])
         wp = np.array([(wp1[0] + wp2[0]) / 2, (wp1[1] + wp2[1]) / 2])
@@ -112,8 +110,9 @@ def get_frame_obj_data(obj: dict[str, Any]) -> list[Any] | None:
         dy = wp2[1] - wp1[1]
         heading = 180 / math.pi * math.atan2(dx, dy)
     elif obj["type"] == "FramePoint":
-        image_point = (obj["left"], obj["top"])
-        wp, zone = fov.get_world_point(image_point, *log_data[1:], return_zone=True)
+        image_point1 = (obj["left"], obj["top"])
+        image_point2 = (None, None)
+        wp, zone = fov.get_world_point(image_point1, *log_data[1:], return_zone=True)
         length = "NA"
         heading = "NA"  # type: ignore[assignment]
         wp1 = ["NA", "NA"]
@@ -139,8 +138,10 @@ def get_frame_obj_data(obj: dict[str, Any]) -> list[Any] | None:
         wp[1],
         zone[0],
         zone[1],
-        image_point[0],
-        image_point[1],
+        image_point1[0],
+        image_point1[1],
+        image_point2[0],
+        image_point2[1],
         wp1[0],
         wp1[1],
         wp2[0],
