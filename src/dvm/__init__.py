@@ -95,4 +95,4 @@ def create_app(testing: bool = False) -> Flask:
 
 
 # Current version
-__version__ = "2.0.12"
+__version__ = "2.1.0"
